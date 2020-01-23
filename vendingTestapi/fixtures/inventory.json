@@ -1,6 +1,7 @@
 [
     {
         "model": "vendingTestapi.coin",
-        "pk": 1
+        "pk": 1,
+        "fields": {}
     }
 ]
