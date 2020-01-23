@@ -1,0 +1,35 @@
+#Virtual Env
+vendingTestEnv
+
+# dotenv
+.env
+
+# Django specific:
+*.log
+local_settings.py
+.vscode
+
+# pyenv
+.python-version
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+#Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# django migrations
+migrations
+
+#For OSX users
+.DS_Store
+
+#Other little things
+*.sqlite3
+media/
+*.pyc
+*.db
+*.pid
