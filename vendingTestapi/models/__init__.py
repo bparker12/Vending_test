@@ -1,2 +1,2 @@
-from coin.py import Coin
-from inventory.py import Inventory
+from .coin import Coin
+from .inventory import Inventory
