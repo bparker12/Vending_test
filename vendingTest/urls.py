@@ -18,12 +18,14 @@ from django.contrib import admin
 from django.conf.urls import url, include
 from rest_framework import routers
 from vendingTestapi.models import *
+from vendingTestapi.views import *
 
 router = routers.DefaultRouter(trailing_slash=False)
-router.register(r'/', Coin, '/')
-router.register(r'/inventory', Inventory, '/inventory')
+router.register(r'', Coins, '')
+router.register(r'inventories', Inventories, 'inventories')
 
 urlpatterns = [
-    url('admin/', admin.site.urls),
-    # url(r'^', include(router.urls)),
+    # url('admin/', admin.site.urls),
+    url(r'^', include(router.urls)),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

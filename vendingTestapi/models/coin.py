@@ -2,4 +2,4 @@ from django.db import models
 
 class Coin(models.Model):
 
-    coin  = models.IntegerField(default=0)
+    quantity  = models.IntegerField(default=0)
