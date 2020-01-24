@@ -8,14 +8,14 @@
     },
     {
         "model": "vendingTestapi.inventory",
-        "pk": 1,
+        "pk": 2,
         "fields": {
             "name": "Item2"
         }
     },
     {
         "model": "vendingTestapi.inventory",
-        "pk": 1,
+        "pk": 3,
         "fields": {
             "name": "Item3"
         }
