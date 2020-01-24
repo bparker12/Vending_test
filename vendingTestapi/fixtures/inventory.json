@@ -1,7 +1,23 @@
 [
     {
-        "model": "vendingTestapi.coin",
+        "model": "vendingTestapi.inventory",
         "pk": 1,
-        "fields": {}
+        "fields": {
+            "name": "Item1"
+        }
+    },
+    {
+        "model": "vendingTestapi.inventory",
+        "pk": 1,
+        "fields": {
+            "name": "Item2"
+        }
+    },
+    {
+        "model": "vendingTestapi.inventory",
+        "pk": 1,
+        "fields": {
+            "name": "Item3"
+        }
     }
 ]
