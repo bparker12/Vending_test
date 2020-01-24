@@ -29,6 +29,13 @@ class Inventories(ViewSet):
 
         return Response(inv_remainging, status=status.HTTP_200_OK)
 
+    def retrieve(self, request, pk=None):
+
+        inventory = Inventory.objects.get(pk=pk)
+
+        serializer = InventorySerializer(inventory, context={'request': request})
+
+        return Response(serializer.data["quantity"], status=status.HTTP_200_OK)
 
     def update(self, request, pk=None):
         inventory = Inventory.objects.get(pk=pk)
