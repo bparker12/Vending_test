@@ -14,13 +14,16 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+# from django.urls import path
 from django.conf.urls import url, include
 from rest_framework import routers
+from vendingTestapi.models import *
 
 router = routers.DefaultRouter(trailing_slash=False)
+router.register(r'/', Coin, '/')
+router.register(r'/inventory', Inventory, '/inventory')
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    url(r'^', include(router.urls)),
+    url('admin/', admin.site.urls),
+    # url(r'^', include(router.urls)),
 ]
