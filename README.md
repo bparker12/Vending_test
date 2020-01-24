@@ -62,5 +62,9 @@ python manage.py runserver
 
 ### Testing
 The original testing for this project was conducted using POSTMAN, click [here](https://www.getpostman.com/downloads/) to download
-* Note - when testing, please be sure to not include any trailing /
+
+### Notes
+- when testing, please be sure to not include any trailing /
+- this app is based on the vending machine to physically allow only quarters
+- coins in the database are considered quarters
 
