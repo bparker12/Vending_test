@@ -13,17 +13,21 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
+# from django.contrib import admin
 # from django.urls import path
 from django.conf.urls import url, include
 from rest_framework import routers
 from vendingTestapi.models import *
+from vendingTestapi.views import *
 
+foo = ""
 router = routers.DefaultRouter(trailing_slash=False)
-router.register(r'/', Coin, '/')
-router.register(r'/inventory', Inventory, '/inventory')
+router.register(r'inventories', Inventories, 'inventorie')
+router.register(r'coins', Coins, 'coin')
+
 
 urlpatterns = [
-    url('admin/', admin.site.urls),
-    # url(r'^', include(router.urls)),
+    # url('admin/', admin.site.urls),
+    url(r'^', include(router.urls)),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
