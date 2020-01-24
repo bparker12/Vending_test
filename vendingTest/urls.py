@@ -20,10 +20,9 @@ from rest_framework import routers
 from vendingTestapi.models import *
 from vendingTestapi.views import *
 
-foo = ""
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'inventories', Inventories, 'inventorie')
-router.register(r'coins', Coins, 'coin')
+router.register(r'', Coins, '')
 
 
 urlpatterns = [
