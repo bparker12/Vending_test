@@ -22,8 +22,12 @@ class Inventories(ViewSet):
         inventory = Inventory.objects.all()
 
         serializer = InventorySerializer(inventory, many=True, context={'request': request})
-        
-        return Response(serializer.data)
+
+        inv_remainging = []
+        for data in serializer.data:
+            inv_remainging.append(data['quantity'])
+
+        return Response(inv_remainging, status=status.HTTP_200_OK)
 
 
     def update(self, request, pk=None):
