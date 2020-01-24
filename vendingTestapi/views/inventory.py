@@ -19,6 +19,7 @@ class InventorySerializer(serializers.HyperlinkedModelSerializer):
 
 class Inventories(ViewSet):
 
+#this function takes a get request with no id # and then returns an array of the remaining inventories for each item in the inventory
     def list(self, request):
         inventory = Inventory.objects.all()
 
@@ -30,6 +31,7 @@ class Inventories(ViewSet):
 
         return Response(inv_remainging, status=status.HTTP_200_OK)
 
+#the retrieve function takes a HTTP request with a id # and then returns the # of items in the inventory for the specific id requested
     def retrieve(self, request, pk=None):
 
         inventory = Inventory.objects.get(pk=pk)
@@ -38,18 +40,13 @@ class Inventories(ViewSet):
 
         return Response(serializer.data["quantity"], status=status.HTTP_200_OK)
 
+
+#this function has several features.  it checks to see if there is a sufficent quantity of requested id # to be vended.  If not it returns a 404 code. If there is suffient quantity, it will then check whether there is enough coin inserted to purchase the item based on its price.
     def update(self, request, pk=None):
 
         inventory = Inventory.objects.get(pk=pk)
 
         coin = Coin.objects.get(pk=1)
-
-        # inv_serializer = InventorySerializer(inventory, context={'request': request})
-        # coin_serializer = CoinSerializer(coin, context={'request': request})
-
-        # inv_price = inv_serializer.data["price"]
-        # inv_qty = inv_serializer.data["quantity"]
-        # coin_qty = (coin_serializer.data["quantity"])
 
         inv_price = inventory.price
         inv_qty = inventory.quantity
@@ -62,9 +59,20 @@ class Inventories(ViewSet):
                 return Response(status=status.HTTP_403_FORBIDDEN, headers={"X-Coins": coins_short})
             else:
                 inventory.quantity = inv_qty - 1
-                inv_remaining = inv_qty
+                inv_remaining = inventory.quantity
+                vended = {"quantity": 1}
+
                 coin_return = coin_qty - inv_price
                 coin.quantity = 0
+
                 inventory.save()
                 coin.save()
-                return Response(status=status.HTTP_200_OK, headers={"X-Coins": coin_return})
+
+                headers = {
+                    "X-Coins": coin_return,
+                    "X-Inventory-Remaining": inv_remaining
+                }
+                return Response(vended, status=status.HTTP_200_OK, headers=headers)
+
+        else:
+            return Response(status=status.HTTP_404_NOT_FOUND, headers={"X-Coins": coin_qty})

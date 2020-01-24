@@ -25,17 +25,17 @@ class Coins(ViewSet):
 
         return Response(serializer.data)
 
+#this function takes the put HTTP request and adds the number of coins in the request body and saves it to the current coin total in the database. It also returns the total amount in the database a a response in the headers
     def put(self, request):
 
         coin = Coin.objects.get(pk=1)
-        print(request.data["coin"])
 
         coin.quantity = coin.quantity + request.data["coin"]
         coin.save()
 
-        reponse = "X-Coins:"
         return Response(status=status.HTTP_204_NO_CONTENT, headers={'X-Coins': coin.quantity})
 
+#this function takes the delete HTTP request, determines how many coins are available, and then return the # of coins back to user and then sets the total back to 0 and updates the database
     def delete(self, request):
 
         coin = Coin.objects.get(pk=1)
@@ -43,5 +43,3 @@ class Coins(ViewSet):
         coin.quantity = 0
         coin.save()
         return Response(status=status.HTTP_204_NO_CONTENT, headers={'X-Coins': returned})
-#then set quantity to 0
-#send back a response
