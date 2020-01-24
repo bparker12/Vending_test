@@ -18,17 +18,31 @@ class CoinSerializer(serializers.HyperlinkedModelSerializer):
 
 class Coins(ViewSet):
 
-    def update(self, request, pk=None):
-        #can't get a put request to be recognized
+    def list(self, request):
+        coin = Coin.objects.all()
+
+        serializer = CoinSerializer(coin, many=True, context={'request': request})
+
+        return Response(serializer.data)
+
+    def put(self, request):
+
         coin = Coin.objects.get(pk=1)
-        print(request.data)
-        # coin.save()
-        return Response({}, status=status.HTTP_204_NO_CONTENT)
+        print(request.data["coin"])
 
-    def destroy(self, request, pk=None):
+        coin.quantity = coin.quantity + request.data["coin"]
+        coin.save()
 
-        coin = Coin.objects.get(pk=pk)
-        if coin.quantity > 0:
-            return 0
+        reponse = "X-Coins:"
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+    def delete(self, request):
+
+        coin = Coin.objects.get(pk=1)
+        print(coin.quantity)
+        coin.quantity = 0
+        print(coin.quantity)
+        coin.save()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 #then set quantity to 0
 #send back a response

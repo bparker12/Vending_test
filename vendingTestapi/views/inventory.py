@@ -19,11 +19,11 @@ class InventorySerializer(serializers.HyperlinkedModelSerializer):
 class Inventories(ViewSet):
 
     def list(self, request):
-        # inventory = Inventory.objects.getall()
+        inventory = Inventory.objects.all()
 
-        # serializer = DepartmentSerializer(inventory, many=True, context={'request': request})
+        serializer = InventorySerializer(inventory, many=True, context={'request': request})
 
-        return HttpResponse('Get Method')
+        return Response(serializer.data)
 
 
     def update(self, request, pk=None):
