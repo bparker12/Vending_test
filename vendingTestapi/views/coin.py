@@ -34,15 +34,14 @@ class Coins(ViewSet):
         coin.save()
 
         reponse = "X-Coins:"
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response(status=status.HTTP_204_NO_CONTENT, headers={'X-Coins': coin.quantity})
 
     def delete(self, request):
 
         coin = Coin.objects.get(pk=1)
-        print(coin.quantity)
+        returned = coin.quantity
         coin.quantity = 0
-        print(coin.quantity)
         coin.save()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response(status=status.HTTP_204_NO_CONTENT, headers={'X-Coins': returned})
 #then set quantity to 0
 #send back a response

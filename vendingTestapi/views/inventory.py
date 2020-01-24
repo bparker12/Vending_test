@@ -22,7 +22,7 @@ class Inventories(ViewSet):
         inventory = Inventory.objects.all()
 
         serializer = InventorySerializer(inventory, many=True, context={'request': request})
-
+        
         return Response(serializer.data)
 
 
